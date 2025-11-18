@@ -1,0 +1,140 @@
+<div class="row justify-content-center">
+  <div class="col-lg-10 col-xl-9">
+    <h1 class="mb-4 display-5 fw-bold text-center text-primary">
+      Sıkça Sorulan Sorular (Soru-Cevap Modülü)
+    </h1>
+    <p class="lead text-center mb-5 text-muted">
+      Etkinlik Yönetim Sistemi, kayıt ve teknik kriterler hakkında en çok merak
+      edilenler.
+    </p>
+
+    <div class="accordion" id="faqAccordion">
+      <div class="accordion-item shadow-sm mb-3">
+        <h2 class="accordion-header" id="headingOne">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseOne"
+            aria-expanded="true"
+            aria-controls="collapseOne"
+          >
+            <i class="fas fa-user-check me-2 text-success"></i> Sisteme nasıl
+            kayıt olabilirim ve giriş yapabilirim?
+          </button>
+        </h2>
+        <div
+          id="collapseOne"
+          class="accordion-collapse collapse show"
+          aria-labelledby="headingOne"
+          data-bs-parent="#faqAccordion"
+        >
+          <div class="accordion-body">
+            Kayıt olmak için navigasyon çubuğundaki **"Kayıt Ol"** butonuna
+            tıklamanız yeterlidir. Gerekli bilgileri (Kullanıcı Adı, E-posta,
+            Şifre) girdikten sonra hesabınız oluşturulur. Giriş yapmak için ise
+            **"Giriş Yap"** butonunu kullanabilirsiniz. Şifreleriniz
+            veritabanına **hashlenerek** kaydedilmektedir.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item shadow-sm mb-3">
+        <h2 class="accordion-header" id="headingTwo">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseTwo"
+            aria-expanded="false"
+            aria-controls="collapseTwo"
+          >
+            <i class="fas fa-calendar-plus me-2 text-info"></i> Etkinliklere
+            kayıt olmak ücretli midir ve nasıl kayıt yaptırılır?
+          </button>
+        </h2>
+        <div
+          id="collapseTwo"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingTwo"
+          data-bs-parent="#faqAccordion"
+        >
+          <div class="accordion-body">
+            Etkinliklerin ücretli olup olmadığı, etkinliğin detay sayfasında
+            belirtilmiştir. Çoğu etkinlik ücretsizdir. Kayıt yaptırmak için,
+            ilgilendiğiniz etkinliğin detay sayfasına giderek **"Kayıt Ol"**
+            butonuna tıklamanız ve açılan formu doldurmanız gerekmektedir.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item shadow-sm mb-3">
+        <h2 class="accordion-header" id="headingThree">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseThree"
+            aria-expanded="false"
+            aria-controls="collapseThree"
+          >
+            <i class="fas fa-lock me-2 text-warning"></i> Yönetim Paneline
+            kimler erişebilir?
+          </button>
+        </h2>
+        <div
+          id="collapseThree"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingThree"
+          data-bs-parent="#faqAccordion"
+        >
+          <div class="accordion-body">
+            Yönetim paneli erişimi, yalnızca **'admin'** rolüne sahip
+            kullanıcılara açıktır. Standart kullanıcılar (user role) paneli
+            göremez ve erişemezler. Bu sistem, projeye dahil olan **"Admin Panel
+            ve Kullanıcı Yetkilendirmesi"** kriterini sağlamaktadır.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item shadow-sm mb-3">
+        <h2 class="accordion-header" id="headingFour">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseFour"
+            aria-expanded="false"
+            aria-controls="collapseFour"
+          >
+            <i class="fas fa-code me-2 text-danger"></i> Projede hangi güvenlik
+            ve performans kriterleri uygulandı?
+          </button>
+        </h2>
+        <div
+          id="collapseFour"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingFour"
+          data-bs-parent="#faqAccordion"
+        >
+          <div class="accordion-body">
+            Projeyi daha güvenli ve SEO dostu hale getirmek için iki temel
+            kriter uygulandı:
+            <ul>
+              <li>
+                **CSRF Koruması:** Form gönderimleri **CSRF token**'ları ile
+                korunmaktadır, bu sayede Cross-Site Request Forgery saldırıları
+                engellenir.
+              </li>
+              <li>
+                **Slugify:** Etkinlik başlıkları, daha okunaklı ve arama motoru
+                dostu URL'ler oluşturmak için otomatik olarak küçük harfli,
+                tirelerle ayrılmış (slug) hale getirilecektir.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

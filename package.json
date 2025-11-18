@@ -1,0 +1,24 @@
+{
+  "name": "eventmanagementapp",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "drmsbgr",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "connect-session-sequelize": "^8.0.2",
+    "csurf": "^1.11.0",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "sequelize": "^6.37.7",
+    "slugify": "^1.6.6",
+    "sqlite3": "^5.1.7"
+  }
+}

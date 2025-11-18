@@ -1,0 +1,21 @@
+/* public/css/style.css */
+
+/* 1. HTML ve BODY'nin viewport (görüntü alanı) yüksekliğini kaplamasını sağla */
+html {
+  position: relative; /* Gerekli olabilir */
+  min-height: 100%; /* Sayfa yüksekliğini minimum ekran yüksekliği kadar ayarla */
+}
+
+body {
+  display: flex; /* Flexbox'ı etkinleştir */
+  flex-direction: column; /* Öğeleri dikey olarak sırala (header, main, footer) */
+  min-height: 100vh; /* Minimum yüksekliği tam ekran yüksekliği yap */
+  margin-bottom: 0; /* Alt boşlukları sıfırla */
+  /* Yatay kayma sorununu çözmek için eklemiştik (İsteğe bağlı) */
+  /*overflow-x: hidden;*/
+}
+
+/* 2. Main içeriğinin esnemesini ve kalan tüm alanı doldurmasını sağla */
+.flex-grow-1 {
+  flex-grow: 1;
+}
