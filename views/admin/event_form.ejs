@@ -1,0 +1,127 @@
+<h1 class="mb-4 display-6 fw-bold">
+  <i class="fas fa-plus-circle me-2 text-success"></i> Yeni Etkinlik Ekle
+</h1>
+<p class="lead text-muted">
+  Etkinliğin tüm detaylarını girin ve ana görselini yükleyin.
+</p>
+
+<hr />
+
+<div class="row justify-content-center">
+  <div class="col-lg-9">
+    <div class="card shadow-lg mb-5">
+      <div class="card-body">
+        <form
+          action="/admin/events/create"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+          <div class="mb-3">
+            <label for="title" class="form-label fw-bold"
+              >Etkinlik Başlığı</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="title"
+              name="title"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="desc" class="form-label fw-bold">Açıklama</label>
+            <textarea
+              class="form-control"
+              id="desc"
+              name="desc"
+              rows="4"
+              required
+            ></textarea>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="date" class="form-label fw-bold">Tarih ve Saat</label>
+              <input
+                type="datetime-local"
+                class="form-control"
+                id="date"
+                name="date"
+                required
+              />
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="location" class="form-label fw-bold"
+                >Konum / Yer</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="location"
+                name="location"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="quota" class="form-label fw-bold"
+              >Kontenjan (Kişi Sayısı)</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="quota"
+              name="quota"
+              min="1"
+              value="0"
+              required
+            />
+          </div>
+
+          <hr />
+
+          <div class="mb-3">
+            <label for="event_image" class="form-label fw-bold"
+              ><i class="fas fa-image me-1"></i> Ana Görsel Yükle</label
+            >
+            <input
+              class="form-control"
+              type="file"
+              id="event_image"
+              name="event_image"
+              accept="image/*"
+              required
+            />
+            <small class="text-muted"
+              >Lütfen etkinliği temsil eden tek bir resim yükleyin.</small
+            >
+          </div>
+
+          <div class="form-check mb-4">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value="true"
+              id="isPublished"
+              name="isPublished"
+            />
+            <label class="form-check-label fw-bold" for="isPublished">
+              Şimdi Yayınla (Etkinlik hemen ana sayfada gözüksün)
+            </label>
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-success btn-lg">
+              <i class="fas fa-save me-2"></i> Etkinliği Kaydet
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

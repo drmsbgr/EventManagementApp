@@ -26,6 +26,12 @@ async function connectDB() {
     await sequelize.authenticate();
     console.log("SQLite Bağlantısı Başarılı.");
 
+    // Önceki başarısız sync'lerden kalan backup tablolarını temizle
+    await sequelize.query("DROP TABLE IF EXISTS users_backup;");
+    await sequelize.query("DROP TABLE IF EXISTS sessions_backup;");
+    await sequelize.query("DROP TABLE IF EXISTS events_backup;");
+    await sequelize.query("DROP TABLE IF EXISTS registrations_backup;");
+
     // Tüm modelleri senkronize et (tabloları oluştur/güncelle)
     await sequelize.sync({ alter: true }); // alter: true, mevcut tabloları model değişikliklerine göre günceller
     console.log("Veritabanı Tabloları Senkronize Edildi.");

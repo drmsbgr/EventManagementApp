@@ -8,19 +8,19 @@ Bu proje şu anda aktif olarak geliştirilmektedir. Henüz tamamlanmamıştır v
 
 ## Mevcut Özellikler
 
-*   **Kullanıcı Kimlik Doğrulama:** Güvenli kullanıcı kaydı, girişi ve çıkış işlemleri.
-*   **Oturum Yönetimi:** `express-session` ve `connect-session-sequelize` ile kalıcı oturum yönetimi.
-*   **Rol Tabanlı Erişim Kontrolü:** `admin` ve `user` olmak üzere iki farklı kullanıcı rolü.
-*   **Güvenlik:** `csurf` ile CSRF (Siteler Arası İstek Sahtekarlığı) koruması.
-*   **Şifre Güvenliği:** `bcrypt.js` kullanılarak kullanıcı şifrelerinin güvenli bir şekilde hash'lenmesi.
+- **Kullanıcı Kimlik Doğrulama:** Güvenli kullanıcı kaydı, girişi ve çıkış işlemleri.
+- **Oturum Yönetimi:** `express-session` ve `connect-session-sequelize` ile kalıcı oturum yönetimi.
+- **Rol Tabanlı Erişim Kontrolü:** `admin` ve `user` olmak üzere iki farklı kullanıcı rolü.
+- **Güvenlik:** `csurf` ile CSRF (Siteler Arası İstek Sahtekarlığı) koruması.
+- **Şifre Güvenliği:** `bcrypt.js` kullanılarak kullanıcı şifrelerinin güvenli bir şekilde hash'lenmesi.
 
 ## Kullanılan Teknolojiler
 
-*   **Backend:** Node.js, Express.js
-*   **Veritabanı:** SQLite (Sequelize ORM ile)
-*   **View Motoru:** EJS
-*   **Kimlik Doğrulama ve Oturum:** `bcrypt.js`, `express-session`
-*   **Güvenlik:** `csurf`
+- **Backend:** Node.js, Express.js
+- **Veritabanı:** SQLite (Sequelize ORM ile)
+- **View Motoru:** EJS
+- **Kimlik Doğrulama ve Oturum:** `bcrypt.js`, `express-session`
+- **Güvenlik:** `csurf`
 
 ## Kurulum ve Başlatma
 
@@ -28,23 +28,26 @@ Projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları izleyin.
 
 ### Gereksinimler
 
-*   Node.js ve npm
+- Node.js ve npm
 
 ### Adımlar
 
 1.  **Projeyi klonlayın:**
+
     ```bash
     git clone <repository-url>
     cd EventManagementApp
     ```
 
 2.  **Gerekli paketleri yükleyin:**
+
     ```bash
     npm install
     ```
 
 3.  **`.env` dosyasını oluşturun:**
     Projenin ana dizininde `.env` adında bir dosya oluşturun ve içine oturum (session) için gizli bir anahtar ekleyin:
+
     ```
     SESSION_SECRET=buraya_guvenli_ve_rastgele_bir_dizi_yazin
     ```

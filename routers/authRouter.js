@@ -1,22 +1,16 @@
 const express = require("express");
-const csrf = require("csurf"); // CSRF koruması
+const router = express.Router();
 const guestMiddleware = require("../middleware/guest");
 
 const controller = require("../controllers/authController");
 
-const router = express.Router();
+router.get("/login", guestMiddleware, controller.get_login);
+router.post("/login", controller.post_login);
+router.get("/register", guestMiddleware, controller.get_register);
+router.post("/register", controller.post_register);
 
-const csrfProtection = csrf({ cookie: false });
-
-router.get("/login", csrfProtection, guestMiddleware, controller.get_login);
-router.post("/login", csrfProtection, controller.post_login);
-router.get(
-  "/register",
-  csrfProtection,
-  guestMiddleware,
-  controller.get_register
-);
-router.post("/register", csrfProtection, controller.post_register);
-router.get("/logout", csrfProtection, guestMiddleware, controller.logout);
+// Çıkış işlemini hem GET (link üzerinden) hem de POST (form üzerinden güvenli) ile yapabilmek için
+router.get("/log-out", controller.logout);
+router.post("/log-out", controller.logout);
 
 module.exports = router;

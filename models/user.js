@@ -2,7 +2,7 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../db");
 
-const user = sequelize.define(
+const User = sequelize.define(
   "User",
   {
     // Otomatik olarak id alanı eklenecek.
@@ -34,4 +34,4 @@ const user = sequelize.define(
   }
 );
 
-module.exports = user;
+module.exports = User;

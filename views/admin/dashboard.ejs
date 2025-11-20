@@ -1,0 +1,81 @@
+<h1 class="mb-4 display-4 fw-bold">Yönetim Paneli</h1>
+<p class="lead text-muted">
+  Sisteminizdeki etkinlikleri, kullanıcıları ve kayıtları buradan
+  yönetebilirsiniz.
+</p>
+
+<% if (typeof error !== 'undefined' && error) { %>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <i class="fas fa-exclamation-triangle me-2"></i>
+
+  <strong>Hata!</strong> <%= error %>
+
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Kapat"
+  ></button>
+</div>
+<% } %>
+
+<hr />
+
+<div class="row g-4">
+  <div class="col-md-6 col-lg-4">
+    <div class="card shadow-sm h-100 border-primary">
+      <div class="card-body">
+        <h5 class="card-title">
+          <i class="fas fa-calendar-alt me-2 text-primary"></i> Etkinlikler
+        </h5>
+        <p class="card-text">
+          Yeni etkinlik oluşturun, mevcutları düzenleyin, yayınlayın veya silin.
+        </p>
+      </div>
+      <div class="card-footer bg-light">
+        <a href="/admin/events" class="btn btn-sm btn-primary">Yönet</a>
+        <a
+          href="/admin/events/create"
+          class="btn btn-sm btn-outline-success ms-2"
+          ><i class="fas fa-plus"></i> Yeni Ekle</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-lg-4">
+    <div class="card shadow-sm h-100 border-success">
+      <div class="card-body">
+        <h5 class="card-title">
+          <i class="fas fa-users me-2 text-success"></i> Kullanıcılar
+        </h5>
+        <p class="card-text">
+          Sisteme kayıtlı kullanıcıları listeleyin ve rollerini (admin/user)
+          güncelleyin.
+        </p>
+      </div>
+      <div class="card-footer bg-light">
+        <a href="/admin/users" class="btn btn-sm btn-success">Yönet</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-lg-4">
+    <div class="card shadow-sm h-100 border-warning">
+      <div class="card-body">
+        <h5 class="card-title">
+          <i class="fas fa-chart-line me-2 text-warning"></i> İstatistikler
+        </h5>
+        <p class="card-text">
+          Toplam ziyaretçi sayısı, online kullanıcı sayısı ve etkinlik
+          kayıtlarını görüntüleyin.
+        </p>
+      </div>
+      <div class="card-footer bg-light">
+        <a href="/admin/stats" class="btn btn-sm btn-warning text-dark"
+          >Görüntüle</a
+        >
+      </div>
+    </div>
+  </div>
+</div>

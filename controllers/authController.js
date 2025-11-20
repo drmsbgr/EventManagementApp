@@ -116,9 +116,11 @@ exports.post_register = async (req, res) => {
 };
 
 exports.logout = (req, res) => {
+  console.log("Çıkış yapılıyor...");
   req.session.destroy((err) => {
-    console.log(err);
-    // Oturum sonlandıktan sonra ana sayfaya yönlendir
-    res.redirect("/");
+    if (err) {
+      console.log("Oturum sonlandırma hatası:", err);
+    }
+    res.redirect(req.get("Referer") || "/");
   });
 };
