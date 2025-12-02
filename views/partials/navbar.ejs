@@ -1,6 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="/">🗓️ Evento</a>
+    <a class="navbar-brand" href="/"
+      ><img
+        src="/static/favicon.png"
+        class="img-fluid m-1"
+        alt="Sayfa ikonu"
+        width="50"
+      />
+      Evento</a
+    >
     <button
       class="navbar-toggler"
       type="button"
@@ -18,15 +26,15 @@
           <a class="nav-link" href="/events">Etkinlikler</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/faq">Soru-Cevap</a>
+          <a class="nav-link" href="/faq">SSS</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-warning" href="/admin">Yönetim Paneli</a>
         </li>
       </ul>
 
-      <div class="d-flex">
-        <% if (isAuthenticated) { %>
+      <div class="d-flex align-items-center">
+        <%- include('./online_counter') %> <% if (isAuthenticated) { %>
         <div class="dropdown">
           <button
             class="btn btn-outline-light dropdown-toggle me-2"
@@ -44,7 +52,7 @@
             </li>
             <li><hr class="dropdown-divider" /></li>
             <li>
-              <form action="/auth/log-out" method="POST" class="m-0">
+              <form action="/auth/logout" method="POST" class="m-0">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
                 <button type="submit" class="dropdown-item text-danger">
                   <i class="fas fa-sign-out-alt me-1"></i> Çıkış Yap
@@ -61,3 +69,10 @@
     </div>
   </div>
 </nav>
+<% if (latestAnnouncement) { %>
+<div class="container-fluid bg-info text-white text-center py-2 shadow-sm">
+  <i class="fas fa-bullhorn me-2"></i>
+  <span class="fw-bold"><%= latestAnnouncement.title %>:</span>
+  <%= latestAnnouncement.content %>
+</div>
+<% } %>

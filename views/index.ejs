@@ -3,7 +3,10 @@
   <%- include('./partials/header') %>
   <body>
     <%- include('./partials/navbar') %>
-    <main class="container my-4 flex-grow-1"><%- include(contentPath) %></main>
+    <main class="container my-4 flex-grow-1" style="min-height: 120vh">
+      <%- include(contentPath) %>
+    </main>
+    <div class="container"><%- include('./partials/sitemap') %></div>
     <%- include('./partials/footer') %>
   </body>
 </html>

@@ -1,0 +1,243 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="display-6 fw-bold">
+    <i class="fas fa-bullhorn me-2 text-info"></i> Duyuru Yönetimi
+  </h1>
+  <button
+    type="button"
+    class="btn btn-success btn-lg"
+    data-bs-toggle="modal"
+    data-bs-target="#addAnnouncementModal"
+  >
+    <i class="fas fa-plus me-2"></i> Yeni Duyuru Ekle
+  </button>
+</div>
+<p class="lead text-muted">
+  Sistem genelinde yayınlanacak duyuruları buradan yönetebilir, yayınlayabilir
+  veya kaldırabilirsiniz.
+</p>
+
+<hr />
+
+<% if (typeof error !== 'undefined' && error) { %>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <i class="fas fa-exclamation-triangle me-2"></i>
+  <strong>Hata!</strong> <%= error %>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Kapat"
+  ></button>
+</div>
+<% } %> <% if (typeof success !== 'undefined' && success) { %>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <i class="fas fa-check-circle me-2"></i>
+  <strong>Başarılı!</strong> <%= success %>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Kapat"
+  ></button>
+</div>
+<% } %>
+<div class="card shadow-lg">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover table-striped mb-0">
+        <thead class="bg-light text-muted">
+          <tr>
+            <th scope="col" style="width: 5%">#ID</th>
+            <th scope="col" style="width: 35%">Başlık ve İçerik</th>
+            <th scope="col" style="width: 15%">Yayın Tarihi</th>
+            <th scope="col" style="width: 10%">Yayınlandı</th>
+            <th scope="col" style="width: 15%">Oluşturan</th>
+            <th scope="col" style="width: 20%">İşlemler</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (announcements && announcements.length > 0) { %> <%
+          announcements.forEach(announcement => { %>
+          <tr>
+            <th scope="row"><%= announcement.id %></th>
+            <td>
+              <strong><%= announcement.title %></strong>
+              <br />
+              <small class="text-muted"
+                ><%= announcement.content.substring(0, 50) %>...</small
+              >
+            </td>
+            <td>
+              <%= new Date(announcement.createdAt).toLocaleDateString('tr-TR', {
+              year: 'numeric', month: 'short', day: 'numeric' }) %>
+            </td>
+            <td>
+              <% if (announcement.isPublished) { %>
+              <span class="badge bg-success"
+                ><i class="fas fa-check"></i> Evet</span
+              >
+              <% } else { %>
+              <span class="badge bg-warning text-dark"
+                ><i class="fas fa-clock"></i> Hayır</span
+              >
+              <% } %>
+            </td>
+            <td>
+              <%= announcement.publisher ? announcement.publisher.username :
+              'Bilinmiyor' %>
+            </td>
+            <td>
+              <a
+                href="/admin/announcements/edit/<%= announcement.id %>"
+                class="btn btn-sm btn-info text-white me-1"
+                title="Düzenle"
+              >
+                <i class="fas fa-edit"></i>
+              </a>
+              <button
+                type="button"
+                class="btn btn-sm btn-danger"
+                title="Sil"
+                data-bs-toggle="modal"
+                data-bs-target="#deleteAnnouncementModal<%= announcement.id %>"
+              >
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </td>
+          </tr>
+          <% }); %> <% } else { %>
+          <tr>
+            <td colspan="6" class="text-center text-muted py-4">
+              Henüz kayıtlı bir duyuru bulunmamaktadır.
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="addAnnouncementModal"
+  tabindex="-1"
+  aria-labelledby="addAnnouncementModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="addAnnouncementModalLabel">
+          Yeni Duyuru Yayınla
+        </h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form action="/admin/announcements/create" method="POST">
+        <div class="modal-body">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+          <div class="mb-3">
+            <label for="announcementTitle" class="form-label">Başlık</label>
+            <input
+              type="text"
+              class="form-control"
+              id="announcementTitle"
+              name="title"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="announcementContent" class="form-label">İçerik</label>
+            <textarea
+              class="form-control"
+              id="announcementContent"
+              name="content"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="isPublished"
+              name="isPublished"
+            />
+            <label class="form-check-label" for="isPublished">
+              Hemen Yayınla
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            İptal
+          </button>
+          <button type="submit" class="btn btn-success">
+            Kaydet ve Yayınla
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<% if (announcements && announcements.length > 0) { %> <%
+announcements.forEach(announcement => { %>
+<div
+  class="modal fade"
+  id="deleteAnnouncementModal<%= announcement.id %>"
+  tabindex="-1"
+  aria-labelledby="deleteAnnouncementModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="deleteAnnouncementModalLabel">
+          Duyuru Silme Onayı
+        </h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <strong><%= announcement.title %></strong> başlıklı duyuruyu kalıcı
+        olarak silmek istediğinizden emin misiniz?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          İptal
+        </button>
+        <form
+          action="/admin/announcements/delete"
+          method="POST"
+          class="d-inline"
+        >
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <input
+            type="hidden"
+            name="announcementId"
+            value="<%= announcement.id %>"
+          />
+          <button type="submit" class="btn btn-danger">Evet, Sil</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<% }); %> <% } %>

@@ -22,30 +22,41 @@
               id="search"
               name="q"
               placeholder="Başlıkta ara..."
-            />
+              value="<%= filters.q || '' %>"
+              />
           </div>
 
           <div class="mb-3">
-            <label for="dateFilter" class="form-label fw-bold"
-              >Tarih Aralığı</label
-            >
-            <select class="form-select" id="dateFilter" name="date">
-              <option value="">Tüm Tarihler</option>
-              <option value="today">Bugün</option>
-              <option value="week">Bu Hafta</option>
-              <option value="month">Bu Ay</option>
-              <option value="future">Gelecek Etkinlikler</option>
-            </select>
-          </div>
+            <label for="dateFilter" class="form-label fw-bold">Tarih Aralığı</label>
+      <select class="form-select" id="dateFilter" name="date">
+        <option value="" <%= filters.date === '' ? 'selected' : '' %>>Tüm Tarihler
+
+        </option>
+        <option value="today" <%= filters.date === 'today' ? 'selected' : '' %>>Bugün
+
+        </option>
+        <option value="week" <%= filters.date === 'week' ? 'selected' : '' %>>Bu Hafta
+
+        </option>
+        <option value="month" <%= filters.date === 'month' ? 'selected' : '' %>>Bu Ay
+
+        </option>
+        <option value="future" <%= filters.date === 'future' ? 'selected' : '' %>>Gelecek Etkinlikler
+          
+        </option>
+      </select>
+</div>
 
           <div class="mb-3">
             <label for="locationFilter" class="form-label fw-bold">Konum</label>
-            <select class="form-select" id="locationFilter" name="location">
-              <option value="">Tüm Konumlar</option>
-              <option value="online">Online (Webinar)</option>
-              <option value="ankara">Ankara</option>
-              <option value="istanbul">İstanbul</option>
-            </select>
+            <input
+              type="text"
+              class="form-control"
+              id="locationFilter"
+              name="location"
+              placeholder="Konumda ara..."
+              value="<%= filters.location || '' %>"
+            />
           </div>
 
           <div class="d-grid gap-2">
@@ -69,7 +80,7 @@
           <div class="row g-0">
             <div class="col-md-4">
               <img
-                src="<%= 'static'+event.imagePath || '/static/img/default-event.jpg' %>"
+                src="<%= event.imagePath || '/static/img/default-event.png' %>"
                 class="img-fluid rounded-start h-100"
                 alt="<%= event.title %> Görseli"
                 style="object-fit: cover"

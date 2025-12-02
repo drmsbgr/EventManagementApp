@@ -5,7 +5,7 @@ exports.get_login = (req, res) => {
   res.render("index", {
     title: "Giriş Yap",
     contentPath: "./auth/login",
-    csrfToken: req.csrfToken(),
+    error: null,
   });
 };
 
@@ -60,7 +60,7 @@ exports.get_register = (req, res) => {
   res.render("index", {
     title: "Kayıt Ol",
     contentPath: "./auth/register",
-    csrfToken: req.csrfToken(),
+    error: null,
   });
 };
 
@@ -103,6 +103,7 @@ exports.post_register = async (req, res) => {
     // Başarılı kayıt sonrası giriş sayfasına yönlendir
     req.session.isLoggedIn = true;
     req.session.user = newUser;
+    console.log("Başarılı bir şekilde kayıt oldunuz!");
     return res.redirect("/auth/login"); // Başarılıysa logine git
   } catch (err) {
     console.error("Kayıt hatası:", err);
@@ -116,11 +117,33 @@ exports.post_register = async (req, res) => {
 };
 
 exports.logout = (req, res) => {
-  console.log("Çıkış yapılıyor...");
+  // 1. Mevcut Oturum ID'sini ve Oturum Depolama Nesnesini Al
+  const sid = req.sessionID;
+  const sessionStore = req.sessionStore;
+
+  // 2. Oturum Nesnesini Geçersiz Kıl
   req.session.destroy((err) => {
-    if (err) {
-      console.log("Oturum sonlandırma hatası:", err);
+    if (err) console.error("Session destroy hatası:", err);
+
+    res.clearCookie("connect.sid", {
+      path: "/",
+      // secure: true olmalı, eğer production modda iseniz
+      secure: process.env.NODE_ENV === "production" ? true : false,
+    });
+
+    // 3. KRİTİK ADIM: Oturum kaydını veritabanından hemen sil
+    if (sessionStore && sid) {
+      sessionStore.destroy(sid, (dbErr) => {
+        if (dbErr) {
+          console.error("DB session silme hatası:", dbErr);
+        } else {
+          console.log(`SID: ${sid} başarıyla silindi.`);
+        }
+        res.redirect("/");
+      });
+    } else {
+      // Fallback (Depolamaya erişilemezse bile yönlendir)
+      res.redirect("/");
     }
-    res.redirect(req.get("Referer") || "/");
   });
 };

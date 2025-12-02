@@ -1,1 +1,133 @@
-<%- include("../helper/not_designed_yet") %>
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="display-5 fw-bold text-primary">
+    <i class="fas fa-bookmark me-2"></i> Kayıt Olduğum Etkinlikler
+  </h1>
+  <a href="/events" class="btn btn-outline-primary">
+    <i class="fas fa-calendar-plus me-1"></i> Yeni Etkinlik Keşfet
+  </a>
+</div>
+
+<p class="lead text-muted mb-5">
+  Sistem üzerinden kayıt yaptığınız tüm etkinlikleri bu sayfada görebilirsiniz.
+</p>
+
+<hr />
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  <% if (registrations && registrations.length > 0) { %> <%
+  registrations.forEach(reg => { %> <% const event = reg.Event; %>
+
+  <div class="col">
+    <div class="card h-100 shadow-sm border-0 transition-hover">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img
+            src="<%= event.imagePath || '/static/img/default-event.jpg' %>"
+            class="img-fluid rounded-start h-100"
+            alt="<%= event.title %> Görseli"
+            style="object-fit: cover"
+          />
+        </div>
+
+        <div class="col-md-8">
+          <div class="card-body d-flex flex-column h-100">
+            <h5 class="card-title fw-bold text-dark"><%= event.title %></h5>
+
+            <p class="card-text text-success small mb-2">
+              <i class="fas fa-check-circle me-1"></i> <b>Kayıt Tarihi:</b> <%=
+              new Date(reg.registrationDate).toLocaleDateString('tr-TR') %>
+            </p>
+
+            <p class="card-text text-muted small mb-3">
+              <i class="fas fa-calendar-alt me-1 text-info"></i>
+              <%= new Date(event.date).toLocaleDateString('tr-TR', { year:
+              'numeric', month: 'short', day: 'numeric', hour: '2-digit',
+              minute: '2-digit' }) %>
+              <br />
+              <i class="fas fa-map-marker-alt me-1 text-success"></i>
+              <%= event.location %>
+            </p>
+
+            <div
+              class="mt-auto d-flex justify-content-between align-items-center"
+            >
+              <a
+                href="/events/<%= event.slug %>"
+                class="btn btn-sm btn-outline-info"
+              >
+                <i class="fas fa-info-circle me-1"></i> Detay Sayfası
+              </a>
+
+              <button
+                type="button"
+                class="btn btn-sm btn-danger"
+                title="Kayıt İptal"
+                data-bs-toggle="modal"
+                data-bs-target="#cancelRegModal<%= event.id %>"
+              >
+                <i class="fas fa-times me-1"></i> Kaydı İptal Et
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% }); %> <% } else { %>
+  <div class="col-12">
+    <div class="alert alert-info text-center" role="alert">
+      <i class="fas fa-info-circle me-2"></i> Henüz kayıt olduğunuz bir etkinlik
+      bulunmamaktadır.
+    </div>
+  </div>
+  <% } %>
+</div>
+
+<% if (registrations && registrations.length > 0) { %> <%
+registrations.forEach(reg => { %> <% const event = reg.Event; %>
+<div
+  class="modal fade"
+  id="cancelRegModal<%= event.id %>"
+  tabindex="-1"
+  aria-labelledby="cancelRegModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="cancelRegModalLabel">Kayıt İptali Onayı</h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <strong><%= event.title %></strong> başlıklı etkinliğe yaptığınız kaydı
+        <span class="fw-bold text-danger">iptal etmek</span> istediğinizden emin
+        misiniz?
+        <small class="d-block mt-2 text-muted"
+          >Bu işlem geri alınabilir, ancak kontenjan dolduysa yeniden kayıt
+          yapamayabilirsiniz.</small
+        >
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Geri Dön
+        </button>
+
+        <form
+          action="/user/registrations/cancel"
+          method="POST"
+          class="d-inline"
+        >
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <input type="hidden" name="eventId" value="<%= event.id %>" />
+          <button type="submit" class="btn btn-danger">Evet, İptal Et</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<% }); %> <% } %>

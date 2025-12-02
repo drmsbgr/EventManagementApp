@@ -1,4 +1,4 @@
-const has_logined = (req, res, next) => {
+const is_auth = (req, res, next) => {
   if (!req.session.isLoggedIn) {
     // Oturum kapalıysa, kullanıcıyı ana sayfaya yönlendir
     return res.redirect("/");
@@ -8,4 +8,4 @@ const has_logined = (req, res, next) => {
   next();
 };
 
-module.exports = has_logined;
+module.exports = is_auth;

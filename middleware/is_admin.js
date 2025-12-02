@@ -15,6 +15,7 @@ const isAdmin = (req, res, next) => {
     return res.render("index", {
       title: "Erişim Engellendi",
       contentPath: "./helper/403",
+      csrfToken: req.csrfToken(),
     });
     // Veya daha profesyonel bir yaklaşım:
     // res.status(403).render('index', { title: 'Erişim Engellendi', contentPath: '403' });

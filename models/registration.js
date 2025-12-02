@@ -6,7 +6,10 @@ const Registration = sequelize.define(
   "Registration",
   {
     // id: Otomatik olarak Sequelize tarafından eklenecektir.
-
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+    },
     // 1. User/Kullanıcı (Foreign Key)
     // Sequelize, bunu otomatik olarak 'UserId' olarak adlandıracaktır.
     // Ancak daha açık olması için 'userId' olarak belirtiyoruz.
@@ -30,21 +33,9 @@ const Registration = sequelize.define(
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     },
-    isAttended: {
-      // Katılıp katılmadığı (Etkinlik sonrası takip için)
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-    },
   },
   {
     tableName: "registrations",
-    // Kullanıcının aynı etkinliğe birden fazla kayıt olmasını engellemek için bileşik anahtar
-    indexes: [
-      {
-        unique: true,
-        fields: ["userId", "eventId"],
-      },
-    ],
   }
 );
 

@@ -5,8 +5,10 @@
         <h3 class="fw-light my-4">Yeni Hesap Oluştur</h3>
       </div>
       <div class="card-body">
-        <% if (typeof success !== 'undefined' && success) { %>
-        <div class="alert alert-success" role="alert"><%= success %></div>
+        <%if (error) { %>
+        <div class="alert alert-danger text-center" role="alert">
+          <i class="fas fa-exclamation-triangle me-2"></i> <%= error %>
+        </div>
         <% } %>
 
         <form action="/auth/register" method="POST">

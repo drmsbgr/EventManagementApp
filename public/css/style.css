@@ -19,3 +19,31 @@ body {
 .flex-grow-1 {
   flex-grow: 1;
 }
+
+/* public/css/style.css */
+
+/* Metin Taşımasını Önleyici Kurallar */
+.description-content {
+  /* 1. Kelimelerin dışarı taşmasını engeller (uzun tek kelimeler için) */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+
+  /* 2. Opsiyonel: Eğer kartın yüksekliğini sınırlandırmak isterseniz */
+  /* max-height: 400px; */
+  /* overflow-y: auto; */
+}
+
+/* Eğer açıklamanız tek bir uzun dize ise ve tarayıcının normalde kırmadığı bir kelime içeriyorsa */
+/* Özellikle pre-wrap ile kullanıldığında bu önemlidir */
+.description-content p {
+  word-break: break-all; /* Metin kutuya sığması için her şeyi kırar */
+}
+.event-title-wrap {
+  /* Başlığın yatayda dışarı taşmasını engeller */
+  /* Uzun tek kelimelerin bile satır sonuna geldiğinde kırılmasını sağlar */
+  word-break: break-word;
+  overflow-wrap: break-word;
+
+  /* Gerekli tüm alanı kullanmasını sağlar, ancak taşmaz */
+  max-width: 100%;
+}

@@ -12,6 +12,29 @@
 
 <hr />
 
+<% if (typeof error !== 'undefined' && error) { %>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <i class="fas fa-exclamation-triangle me-2"></i>
+  <strong>Hata!</strong> <%= error %>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Kapat"
+  ></button>
+</div>
+<% } %> <% if (typeof success !== 'undefined' && success) { %>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <i class="fas fa-check-circle me-2"></i>
+  <strong>Başarılı!</strong> <%= success %>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Kapat"
+  ></button>
+</div>
+<% } %>
 <div class="card shadow-lg">
   <div class="card-body p-0">
     <div class="table-responsive">
@@ -35,7 +58,7 @@
             <td>
               <strong><%= event.title %></strong>
               <br />
-              <small class="text-muted"><%= event.slug %></small>
+              <small class="text-muted">slug:<%= event.slug %></small>
             </td>
             <td>
               <%= new Date(event.date).toLocaleDateString('tr-TR', { year:
@@ -63,17 +86,16 @@
               >
                 <i class="fas fa-edit"></i>
               </a>
-              <form
-                action="/admin/events/delete"
-                method="POST"
-                class="d-inline"
+
+              <button
+                type="button"
+                class="btn btn-sm btn-danger"
+                title="Sil"
+                data-bs-toggle="modal"
+                data-bs-target="#deleteEventModal<%= event.id %>"
               >
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-                <input type="hidden" name="eventId" value="<%= event.id %>" />
-                <button type="submit" class="btn btn-sm btn-danger" title="Sil">
-                  <i class="fas fa-trash-alt"></i>
-                </button>
-              </form>
+                <i class="fas fa-trash-alt"></i>
+              </button>
             </td>
           </tr>
           <% }); %> <% } else { %>
@@ -89,3 +111,46 @@
     </div>
   </div>
 </div>
+
+<% if (events && events.length > 0) { %> <% events.forEach(event => { %>
+<div
+  class="modal fade"
+  id="deleteEventModal<%= event.id %>"
+  tabindex="-1"
+  aria-labelledby="deleteEventModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="deleteEventModalLabel">
+          Etkinlik Silme Onayı
+        </h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <strong><%= event.title %></strong> başlıklı etkinliği
+        <span class="fw-bold text-danger">kalıcı olarak silmek</span>
+        istediğinizden emin misiniz? Bu işlem geri alınamaz ve tüm kayıtlar
+        silinecektir!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          İptal
+        </button>
+
+        <form action="/admin/events/delete" method="POST" class="d-inline">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <input type="hidden" name="eventId" value="<%= event.id %>" />
+          <button type="submit" class="btn btn-danger">Evet, Sil</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<% }); %> <% } %>

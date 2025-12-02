@@ -1,0 +1,114 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="display-6 fw-bold">
+    <i class="fas fa-chart-bar me-2 text-warning"></i> Sistem İstatistikleri
+  </h1>
+</div>
+<p class="lead text-muted mb-4">
+  Uygulamanızın temel metrikleri ve performans göstergeleri.
+</p>
+
+<hr />
+
+<div class="row g-4 mb-5">
+  <div class="col-md-6 col-lg-3">
+    <div class="card bg-primary text-white shadow-sm h-100">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col-8">
+            <h2 class="display-5 mb-0 fw-bold"><%= stats.totalUsers %></h2>
+            <p class="card-text">Toplam Kullanıcı</p>
+          </div>
+          <div class="col-4 text-end">
+            <i class="fas fa-users fa-3x opacity-50"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-lg-3">
+    <div class="card bg-success text-white shadow-sm h-100">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col-8">
+            <h2 class="display-5 mb-0 fw-bold"><%= stats.totalEvents %></h2>
+            <p class="card-text">Yayınlanan Etkinlik</p>
+          </div>
+          <div class="col-4 text-end">
+            <i class="fas fa-calendar-check fa-3x opacity-50"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-lg-3">
+    <div class="card bg-info text-white shadow-sm h-100">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col-8">
+            <h2 class="display-5 mb-0 fw-bold">
+              <%= stats.totalRegistrations %>
+            </h2>
+            <p class="card-text">Toplam Kayıt Sayısı</p>
+          </div>
+          <div class="col-4 text-end">
+            <i class="fas fa-user-check fa-3x opacity-50"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-lg-3">
+    <div class="card bg-warning text-dark shadow-sm h-100">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col-8">
+            <h2 class="display-5 mb-0 fw-bold"><%= stats.onlineUsers %></h2>
+            <p class="card-text fw-bold">Online Kullanıcı (Sim.)</p>
+          </div>
+          <div class="col-4 text-end">
+            <i class="fas fa-wifi fa-3x opacity-50"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card shadow-lg">
+      <div class="card-header bg-dark text-white fw-bold">
+        <i class="fas fa-star me-2"></i> En Popüler 5 Etkinlik (Görüntülenme
+        Sayısı)
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <% if (stats.topEvents && stats.topEvents.length > 0) { %> <%
+          stats.topEvents.forEach((event, index) => { %>
+          <li
+            class="list-group-item d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <span
+                class="badge bg-<%= index === 0 ? 'danger' : index === 1 ? 'primary' : 'secondary' %> me-2"
+                ><%= index + 1 %></span
+              >
+              <%= event.title %>
+            </div>
+            <span class="badge bg-light text-dark border p-2">
+              <i class="fas fa-eye me-1"></i> <%= event.numOfViews %>
+            </span>
+          </li>
+          <% }); %> <% } else { %>
+          <li class="list-group-item text-center text-muted">
+            Henüz yayınlanmış etkinlik bulunmamaktadır.
+          </li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

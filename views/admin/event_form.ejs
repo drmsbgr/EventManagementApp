@@ -1,5 +1,6 @@
 <h1 class="mb-4 display-6 fw-bold">
-  <i class="fas fa-plus-circle me-2 text-success"></i> Yeni Etkinlik Ekle
+  <i class="fas fa-plus-circle me-2 text-success"></i><% if(event.id ==
+  undefined){%> Yeni Etkinlik Ekle <%}else{%> Etkinliği Düzenle <%}%>
 </h1>
 <p class="lead text-muted">
   Etkinliğin tüm detaylarını girin ve ana görselini yükleyin.
@@ -12,23 +13,20 @@
     <div class="card shadow-lg mb-5">
       <div class="card-body">
         <form
-          action="/admin/events/create"
+          <% if(event.id == undefined){ %>
+          action="/admin/events/create?_csrf=<%=csrfToken%>"
+          <% } else { %>
+          action="/admin/events/edit/<%= event.id %>?_csrf=<%=csrfToken%>"
+          <% } %>
           method="POST"
           enctype="multipart/form-data"
         >
-          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
 
           <div class="mb-3">
             <label for="title" class="form-label fw-bold"
-              >Etkinlik Başlığı</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="title"
-              name="title"
-              required
-            />
+              >Etkinlik Başlığı</label>
+            <input type="text" class="form-control" id="title" name="title"
+            required value="<%=event.title || "" %>" />
           </div>
 
           <div class="mb-3">
@@ -39,32 +37,23 @@
               name="desc"
               rows="4"
               required
-            ></textarea>
+            >
+<%= event.desc ||""%></textarea>
           </div>
 
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="date" class="form-label fw-bold">Tarih ve Saat</label>
-              <input
-                type="datetime-local"
-                class="form-control"
-                id="date"
-                name="date"
-                required
-              />
+              <input type="datetime-local" class="form-control" id="date"
+              name="date" value="<%= event.date ?
+              event.date.toISOString().slice(0, 16) : "" %>" required />
             </div>
 
             <div class="col-md-6 mb-3">
               <label for="location" class="form-label fw-bold"
-                >Konum / Yer</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                id="location"
-                name="location"
-                required
-              />
+                >Konum / Yer</label>
+              <input type="text" class="form-control" id="location"
+              name="location" value="<%= event.location || "" %>" required />
             </div>
           </div>
 
@@ -78,7 +67,7 @@
               id="quota"
               name="quota"
               min="1"
-              value="0"
+              value="<%= event.quota || 0 %>"
               required
             />
           </div>
@@ -103,13 +92,9 @@
           </div>
 
           <div class="form-check mb-4">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value="true"
-              id="isPublished"
-              name="isPublished"
-            />
+            <input class="form-check-input" type="checkbox" id="isPublished"
+            name="isPublished" value="true" <%= event.isPublished ? "checked" :
+            "" %> />
             <label class="form-check-label fw-bold" for="isPublished">
               Şimdi Yayınla (Etkinlik hemen ana sayfada gözüksün)
             </label>

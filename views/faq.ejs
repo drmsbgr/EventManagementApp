@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
   <div class="col-lg-10 col-xl-9">
     <h1 class="mb-4 display-5 fw-bold text-center text-primary">
-      Sıkça Sorulan Sorular (Soru-Cevap Modülü)
+      Sıkça Sorulan Sorular (Proje Kriterleri Dahil)
     </h1>
     <p class="lead text-center mb-5 text-muted">
       Etkinlik Yönetim Sistemi, kayıt ve teknik kriterler hakkında en çok merak
@@ -30,11 +30,11 @@
           data-bs-parent="#faqAccordion"
         >
           <div class="accordion-body">
-            Kayıt olmak için navigasyon çubuğundaki **"Kayıt Ol"** butonuna
+            Kayıt olmak için navigasyon çubuğundaki <b>"Kayıt Ol"</b> butonuna
             tıklamanız yeterlidir. Gerekli bilgileri (Kullanıcı Adı, E-posta,
             Şifre) girdikten sonra hesabınız oluşturulur. Giriş yapmak için ise
-            **"Giriş Yap"** butonunu kullanabilirsiniz. Şifreleriniz
-            veritabanına **hashlenerek** kaydedilmektedir.
+            <b>"Giriş Yap"</b> butonunu kullanabilirsiniz. Şifreleriniz
+            veritabanına <b>hashlenerek</b> kaydedilmektedir.
           </div>
         </div>
       </div>
@@ -62,8 +62,10 @@
           <div class="accordion-body">
             Etkinliklerin ücretli olup olmadığı, etkinliğin detay sayfasında
             belirtilmiştir. Çoğu etkinlik ücretsizdir. Kayıt yaptırmak için,
-            ilgilendiğiniz etkinliğin detay sayfasına giderek **"Kayıt Ol"**
-            butonuna tıklamanız ve açılan formu doldurmanız gerekmektedir.
+            ilgilendiğiniz etkinliğin detay sayfasına giderek
+            <b>"Kayıt Ol"</b> butonuna tıklamanız ve açılan formu doldurmanız
+            gerekmektedir. Kaydınızı, profilinizdeki
+            <b>Kayıtlarım</b> sayfasından istediğiniz zaman iptal edebilirsiniz.
           </div>
         </div>
       </div>
@@ -89,10 +91,11 @@
           data-bs-parent="#faqAccordion"
         >
           <div class="accordion-body">
-            Yönetim paneli erişimi, yalnızca **'admin'** rolüne sahip
+            Yönetim paneli erişimi, yalnızca <b>'admin'</b> rolüne sahip
             kullanıcılara açıktır. Standart kullanıcılar (user role) paneli
-            göremez ve erişemezler. Bu sistem, projeye dahil olan **"Admin Panel
-            ve Kullanıcı Yetkilendirmesi"** kriterini sağlamaktadır.
+            göremez ve erişemezler. Bu sistem, projeye dahil olan
+            <b>"Admin Panel ve Kullanıcı Yetkilendirmesi"</b> kriterini
+            sağlamaktadır.
           </div>
         </div>
       </div>
@@ -122,16 +125,136 @@
             kriter uygulandı:
             <ul>
               <li>
-                **CSRF Koruması:** Form gönderimleri **CSRF token**'ları ile
-                korunmaktadır, bu sayede Cross-Site Request Forgery saldırıları
-                engellenir.
+                <b>CSRF Koruması:</b> Form gönderimleri <b>CSRF token</b>'ları
+                ile korunmaktadır, bu sayede Cross-Site Request Forgery
+                saldırıları engellenir.
               </li>
               <li>
-                **Slugify:** Etkinlik başlıkları, daha okunaklı ve arama motoru
-                dostu URL'ler oluşturmak için otomatik olarak küçük harfli,
-                tirelerle ayrılmış (slug) hale getirilecektir.
+                <b>Slugify:</b> Etkinlik başlıkları, daha okunaklı ve arama
+                motoru dostu URL'ler oluşturmak için otomatik olarak küçük
+                harfli, tirelerle ayrılmış (slug) hale getirilecektir.
               </li>
             </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item shadow-sm mb-3">
+        <h2 class="accordion-header" id="headingFive">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseFive"
+            aria-expanded="false"
+            aria-controls="collapseFive"
+          >
+            <i class="fas fa-eye me-2 text-warning"></i> Ziyaretçi Sayacı nasıl
+            çalışır ve tek bir kullanıcı sayıyı birden fazla artırabilir mi?
+          </button>
+        </h2>
+        <div
+          id="collapseFive"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingFive"
+          data-bs-parent="#faqAccordion"
+        >
+          <div class="accordion-body">
+            <b>Ziyaretçi Sayacı</b> kriterini yerine getirmek için, her etkinlik
+            detay sayfasında o etkinliğin kaç kez görüntülendiği gösterilir. Bu
+            sayaç, oturum (session) bazlı çalışır. Yani,
+            <b>aynı kullanıcı aynı oturum içerisinde</b> sayfayı yenilese bile,
+            sayaç sadece bir kez artırılır.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item shadow-sm mb-3">
+        <h2 class="accordion-header" id="headingSix">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseSix"
+            aria-expanded="false"
+            aria-controls="collapseSix"
+          >
+            <i class="fas fa-sitemap me-2 text-primary"></i> Site Map (Site
+            Haritası) kriteri nasıl uygulandı?
+          </button>
+        </h2>
+        <div
+          id="collapseSix"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingSix"
+          data-bs-parent="#faqAccordion"
+        >
+          <div class="accordion-body">
+            <b>Site Map</b> kriteri, arama motorlarının sitemizdeki tüm
+            sayfalara kolayca erişmesini sağlamak için uygulandı. Bu yapı,
+            statik sayfalarımızın (Anasayfa, SSS) ve dinamik olarak oluşturulan
+            tüm etkinlik detay sayfalarımızın (URL'leri) arama motorlarına
+            bildirilmesini sağlar.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item shadow-sm mb-3">
+        <h2 class="accordion-header" id="headingSeven">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseSeven"
+            aria-expanded="false"
+            aria-controls="collapseSeven"
+          >
+            <i class="fas fa-wifi me-2 text-success"></i> Online Kullanıcı
+            Sayısı kriteri nasıl takip ediliyor?
+          </button>
+        </h2>
+        <div
+          id="collapseSeven"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingSeven"
+          data-bs-parent="#faqAccordion"
+        >
+          <div class="accordion-body">
+            <b>Online Kullanıcı Sayısı</b> kriteri, oturum yönetimi (session
+            management) kullanılarak simüle edilmektedir. Aktif oturumu olan
+            kullanıcılar, belirli bir süre (örneğin son 15 dakika) içinde aktif
+            sayfa isteği gönderdiklerinde "online" kabul edilir.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item shadow-sm mb-3">
+        <h2 class="accordion-header" id="headingEight">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseEight"
+            aria-expanded="false"
+            aria-controls="collapseEight"
+          >
+            <i class="fas fa-bullhorn me-2 text-danger"></i> Duyuru/Haber Modülü
+            ve Resim Galerisi nasıl çalışıyor?
+          </button>
+        </h2>
+        <div
+          id="collapseEight"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingEight"
+          data-bs-parent="#faqAccordion"
+        >
+          <div class="accordion-body">
+            <b>Duyuru/Haber Modülü</b>, etkinliklerin ana sayfa ve tüm
+            etkinlikler sayfalarında listelenmesiyle sağlanır. Her etkinlik bir
+            duyuru/haber öğesi görevi görür. <b>Resim Galerisi</b> kriteri ise,
+            her etkinliğin Admin Paneli üzerinden yüklenen tek bir ana görsele
+            sahip olmasıyla karşılanır. Bu görsel, etkinlik listelerinde ve
+            detay sayfalarında gösterilir.
           </div>
         </div>
       </div>
